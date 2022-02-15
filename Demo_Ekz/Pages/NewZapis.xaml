@@ -1,0 +1,38 @@
+﻿<Page x:Class="Demo_Ekz.Pages.NewZapisxaml"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Demo_Ekz.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NewZapis">
+    <Grid>
+        <GroupBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Header="Записать на услугу " Padding="20">
+            <StackPanel>
+                <GroupBox Header=" Название услуги">
+                    <TextBlock  x:Name="txtName" Text="{Binding naimenovanie}"/>
+                </GroupBox>
+                <GroupBox Header=" Длительность">
+                    <TextBlock x:Name="txtDuration" Text="{Binding dlitelnost}"/>
+                </GroupBox>
+                <GroupBox Header="Клиент">
+                    <ComboBox x:Name="ComboClient"/>
+                </GroupBox>
+                <GroupBox Header="Дата услуги">
+                    <DatePicker x:Name="DateTimeP" SelectedDateChanged="DateTimeP_SelectedDateChanged"/>
+                </GroupBox>
+                <GroupBox Header="Время услуги">
+                    <TextBox x:Name="Time" TextChanged="Time_TextChanged"/>
+                </GroupBox>
+                <GroupBox Header="Время окончания">
+                    <TextBlock x:Name="TimeEnd"></TextBlock>
+                </GroupBox>
+                <StackPanel Orientation="Vertical">
+                    <Button Content="Добавить запись" Name="BtnAdd" Click="BtnAdd_Click" Height="20" Margin="20"/>
+                    <Button Content="Назад" Name="GoBack" Click="GoBack_Click" Height="20" Margin="20"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        </Grid>
+</Page>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f1b02fbc2bc40d3a6276e746bc4ddfa" Name="Diagram1">
+        <EntityTypeShape EntityType="P_BuzuevaModel.Clienti" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_BuzuevaModel.Pol" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_BuzuevaModel.Service" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="P_BuzuevaModel.ServiceClient" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="P_BuzuevaModel.FK_Clienti_Pol" ManuallyRouted="false" />
+        <AssociationConnector Association="P_BuzuevaModel.FK_ServiceClient_Clienti1" ManuallyRouted="false" />
+        <AssociationConnector Association="P_BuzuevaModel.FK_ServiceClient_Service1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

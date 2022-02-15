@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище P_BuzuevaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clienti">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="familia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="imya" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="otchestvo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="data_rogdenia" Type="date" Nullable="false" />
+          <Property Name="data_registrasii" Type="date" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="pol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="id_pol" />
+          </Key>
+          <Property Name="id_pol" Type="int" Nullable="false" />
+          <Property Name="pol" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naimenovanie" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="izobrazhenie" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dlitelnost" Type="int" Nullable="false" />
+          <Property Name="stoimost" Type="money" Nullable="false" />
+          <Property Name="skidka" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceClient">
+          <Key>
+            <PropertyRef Name="id_serviceclient" />
+          </Key>
+          <Property Name="id_serviceclient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service" Type="int" Nullable="false" />
+          <Property Name="nachalo_okazania" Type="datetime" Nullable="false" />
+          <Property Name="client" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clienti_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Clienti" Type="Self.Clienti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="id_pol" />
+            </Principal>
+            <Dependent Role="Clienti">
+              <PropertyRef Name="pol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceClient_Clienti1">
+          <End Role="Clienti" Type="Self.Clienti" Multiplicity="1" />
+          <End Role="ServiceClient" Type="Self.ServiceClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clienti">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="ServiceClient">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceClient_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceClient" Type="Self.ServiceClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="ServiceClient">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище P_BuzuevaModelContainer">
+          <EntitySet Name="Clienti" EntityType="Self.Clienti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceClient" EntityType="Self.ServiceClient" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clienti_Pol" Association="Self.FK_Clienti_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Clienti" EntitySet="Clienti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceClient_Clienti1" Association="Self.FK_ServiceClient_Clienti1">
+            <End Role="Clienti" EntitySet="Clienti" />
+            <End Role="ServiceClient" EntitySet="ServiceClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceClient_Service1" Association="Self.FK_ServiceClient_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceClient" EntitySet="ServiceClient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="P_BuzuevaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clienti">
+          <Key>
+            <PropertyRef Name="id_client" />
+          </Key>
+          <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="familia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="imya" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="otchestvo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_rogdenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_registrasii" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pol1" Relationship="Self.FK_Clienti_Pol" FromRole="Clienti" ToRole="Pol" />
+          <NavigationProperty Name="ServiceClient" Relationship="Self.FK_ServiceClient_Clienti1" FromRole="Clienti" ToRole="ServiceClient" />
+        </EntityType>
+        <EntityType Name="Pol">
+          <Key>
+            <PropertyRef Name="id_pol" />
+          </Key>
+          <Property Name="id_pol" Type="Int32" Nullable="false" />
+          <Property Name="pol1" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clienti" Relationship="Self.FK_Clienti_Pol" FromRole="Pol" ToRole="Clienti" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="id_service" />
+          </Key>
+          <Property Name="id_service" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naimenovanie" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="izobrazhenie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dlitelnost" Type="Int32" Nullable="false" />
+          <Property Name="stoimost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="skidka" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ServiceClient" Relationship="Self.FK_ServiceClient_Service1" FromRole="Service" ToRole="ServiceClient" />
+        </EntityType>
+        <EntityType Name="ServiceClient">
+          <Key>
+            <PropertyRef Name="id_serviceclient" />
+          </Key>
+          <Property Name="id_serviceclient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service" Type="Int32" Nullable="false" />
+          <Property Name="nachalo_okazania" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="client" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clienti" Relationship="Self.FK_ServiceClient_Clienti1" FromRole="ServiceClient" ToRole="Clienti" />
+          <NavigationProperty Name="Service1" Relationship="Self.FK_ServiceClient_Service1" FromRole="ServiceClient" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Clienti_Pol">
+          <End Role="Pol" Type="Self.Pol" Multiplicity="1" />
+          <End Role="Clienti" Type="Self.Clienti" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pol">
+              <PropertyRef Name="id_pol" />
+            </Principal>
+            <Dependent Role="Clienti">
+              <PropertyRef Name="pol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceClient_Clienti1">
+          <End Role="Clienti" Type="Self.Clienti" Multiplicity="1" />
+          <End Role="ServiceClient" Type="Self.ServiceClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clienti">
+              <PropertyRef Name="id_client" />
+            </Principal>
+            <Dependent Role="ServiceClient">
+              <PropertyRef Name="client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceClient_Service1">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServiceClient" Type="Self.ServiceClient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="id_service" />
+            </Principal>
+            <Dependent Role="ServiceClient">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clienti" EntityType="Self.Clienti" />
+          <EntitySet Name="Pol" EntityType="Self.Pol" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="ServiceClient" EntityType="Self.ServiceClient" />
+          <AssociationSet Name="FK_Clienti_Pol" Association="Self.FK_Clienti_Pol">
+            <End Role="Pol" EntitySet="Pol" />
+            <End Role="Clienti" EntitySet="Clienti" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceClient_Clienti1" Association="Self.FK_ServiceClient_Clienti1">
+            <End Role="Clienti" EntitySet="Clienti" />
+            <End Role="ServiceClient" EntitySet="ServiceClient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceClient_Service1" Association="Self.FK_ServiceClient_Service1">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceClient" EntitySet="ServiceClient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище P_BuzuevaModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Clienti">
+            <EntityTypeMapping TypeName="P_BuzuevaModel.Clienti">
+              <MappingFragment StoreEntitySet="Clienti">
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="familia" ColumnName="familia" />
+                <ScalarProperty Name="imya" ColumnName="imya" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="data_rogdenia" ColumnName="data_rogdenia" />
+                <ScalarProperty Name="data_registrasii" ColumnName="data_registrasii" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="pol" ColumnName="pol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pol">
+            <EntityTypeMapping TypeName="P_BuzuevaModel.Pol">
+              <MappingFragment StoreEntitySet="Pol">
+                <ScalarProperty Name="id_pol" ColumnName="id_pol" />
+                <ScalarProperty Name="pol1" ColumnName="pol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="P_BuzuevaModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="id_service" ColumnName="id_service" />
+                <ScalarProperty Name="naimenovanie" ColumnName="naimenovanie" />
+                <ScalarProperty Name="izobrazhenie" ColumnName="izobrazhenie" />
+                <ScalarProperty Name="dlitelnost" ColumnName="dlitelnost" />
+                <ScalarProperty Name="stoimost" ColumnName="stoimost" />
+                <ScalarProperty Name="skidka" ColumnName="skidka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceClient">
+            <EntityTypeMapping TypeName="P_BuzuevaModel.ServiceClient">
+              <MappingFragment StoreEntitySet="ServiceClient">
+                <ScalarProperty Name="id_serviceclient" ColumnName="id_serviceclient" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="nachalo_okazania" ColumnName="nachalo_okazania" />
+                <ScalarProperty Name="client" ColumnName="client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
